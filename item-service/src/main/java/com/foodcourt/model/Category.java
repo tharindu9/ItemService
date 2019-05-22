@@ -25,6 +25,7 @@ public class Category {
 	@OneToMany(mappedBy ="category", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	
 	
+	
 	List<ItemType> types;
 	public Integer getId() {
 		return id;

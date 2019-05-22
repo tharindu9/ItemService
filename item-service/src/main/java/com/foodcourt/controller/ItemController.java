@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodcourt.model.Item;
+import com.foodcourt.service.ItemService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -28,14 +29,14 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="item",method = RequestMethod.GET)
-	public List<Item> fetchAllItems(){
-		return itemService.fetchAllItems();
+	public List<Item> fetchAll(){
+		return itemService.fetchAll();
 	}
 	
 	@RequestMapping(value="item/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Item> fetchItem(@PathVariable Integer id) {
-			if(itemService.fetchItemById(id)!=null) {
-				return ResponseEntity.ok(itemService.fetchItemById(id));
+	public ResponseEntity<Item> fetchItem(@PathVariable Long id) {
+			if(itemService.fetchOne(id)!=null) {
+				return ResponseEntity.ok(itemService.fetchOne(id));
 			}
 			else {
 				//throw new IdNotFound("Can't find this id : " + id);
@@ -44,9 +45,9 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="item",method = RequestMethod.PUT)
-	public ResponseEntity<Item> updateItem(@RequestBody Item item) throws ObjectNotFoundException{
-			if(itemService.updateItem(item)!=null) {
-				return ResponseEntity.ok(itemService.updateItem(item));
+	public ResponseEntity<Item> update(@RequestBody Item item) throws ObjectNotFoundException{
+			if(itemService.update(item)!=null) {
+				return ResponseEntity.ok(itemService.update(item));
 			}
 			else {
 				//return ResponseEntity.notFound().build();
@@ -55,7 +56,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="item",method = RequestMethod.DELETE)
-	void deleteItem(@RequestBody Item item) {
-		itemService.deleteItem(item);
+	void delete(@RequestBody Item item) {
+		itemService.delete(item);
 	}
 }
