@@ -1,6 +1,14 @@
 package com.foodcourt.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.foodcourt.model.ItemType;
+import com.foodcourt.repository.TypeRepository;
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -9,28 +17,27 @@ public class TypeServiceImpl implements TypeService {
 	TypeRepository typeRepository;
 	
 	@Override
-	public List <ItemTypes> getAllTypes(Integer cid)
+	public List <ItemType> getAll(Integer cid)
 	{
-		List<ItemTypes> types= new ArrayList<>();
+		List<ItemType> types= new ArrayList<>();
 		typeRepository.findByCategoryId(cid).forEach(types :: add);
 		return types;
 	}
 	
 	@Override
-	public Optional<ItemTypes> getItemTypes(Integer id)
+	public Optional<ItemType> getItemTypes(Integer id)
 	{
 		return typeRepository.findById(id);
 	}
 	
 	@Override
-	public void saveType(ItemTypes itemTypes)
+	public void saveType(ItemType itemTypes)
 	{
 		typeRepository.save(itemTypes);
 	}
 	
-	 
 	@Override
-	public void updateType(ItemTypes itemTypes)
+	public void updateType(ItemType itemTypes)
 	{
 		typeRepository.save(itemTypes);
 	}
@@ -41,7 +48,4 @@ public class TypeServiceImpl implements TypeService {
 		typeRepository.deleteById(id);
 	}
 	
-	
-	
-
 }

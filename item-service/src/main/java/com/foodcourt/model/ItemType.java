@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Type {
+public class ItemType {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class Type {
 	@JsonIgnore
 	private Category category;
 	
-	public Type() {
+	public ItemType() {
 		
 	}
 
-	public Type(Integer id, String name, Integer cid) {
+	public ItemType(Integer id, String name, Integer cid) {
 		super();
 		this.id = id;
 		this.name = name;
