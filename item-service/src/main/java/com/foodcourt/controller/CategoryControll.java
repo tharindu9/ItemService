@@ -28,12 +28,12 @@ public class CategoryControll {
 	}
 
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public List<Category> FetchAllCategory() {
+	public List<Category> fetchAllCategory() {
 		return categoryService.fetchAllCategory();
 	}
 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Category> FetchCategory(@PathVariable Integer id)  {
+	public ResponseEntity<Category> fetchCategory(@PathVariable Integer id)  {
 		Category category1 = new Category();
 		category1.setId(id);
 		Category category2 = categoryService.fetchCategory(category1);
@@ -47,13 +47,13 @@ public class CategoryControll {
 	}
 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.PUT)
-	public Category updateCategory(@RequestBody Category category, @PathVariable Integer id) {
+	public Category update(@RequestBody Category category, @PathVariable Integer id) {
 		return categoryService.updateCategory(category);
 
 	}
 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.DELETE)
-	public void deleteCategory(@RequestBody Category category, @PathVariable Integer id) {
+	public void delete(@RequestBody Category category, @PathVariable Integer id) {
 		categoryService.deleteCategory(category);
 	}
 

@@ -30,7 +30,7 @@ public class TypeController {
 	public void saveType( @RequestBody ItemType itemTypes,@PathVariable Integer cid )
 	{
 		itemTypes.setCategory(new Category (cid, ""));
-		typeService.saveType(itemTypes);
+		typeService.save(itemTypes);
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.GET)
@@ -53,15 +53,15 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype/{id}", method=RequestMethod.PUT)
-	public void updateType( @RequestBody ItemType itemTypes,@PathVariable Integer cid, Integer id )
+	public void update( @RequestBody ItemType itemTypes,@PathVariable Integer cid, Integer id )
 	{
 		itemTypes.setCategory(new Category (cid, ""));
-		typeService.updateType(itemTypes);
+		typeService.update(itemTypes);
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype/{id}", method=RequestMethod.DELETE)
-	public void deleteType( @PathVariable Integer id )
+	public void delete( @RequestBody ItemType itemYpe )
 	{
-		typeService.deleteType(id);
+		typeService.delete(itemYpe);
 	}
 }

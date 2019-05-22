@@ -31,21 +31,21 @@ public class TypeServiceImpl implements TypeService {
 	}
 	
 	@Override
-	public void saveType(ItemType itemTypes)
+	public void save(ItemType itemTypes)
 	{
 		typeRepository.save(itemTypes);
 	}
 	
 	@Override
-	public void updateType(ItemType itemTypes)
+	public void update(ItemType itemTypes)
 	{
 		typeRepository.save(itemTypes);
 	}
 	
 	@Override
-	public void deleteType(Integer id)
+	public void delete(ItemType itemType)
 	{
-		typeRepository.deleteById(id);
+		typeRepository.delete(itemType);
 	}
 	
 }

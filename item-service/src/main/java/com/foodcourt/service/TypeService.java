@@ -7,9 +7,9 @@ import com.foodcourt.model.ItemType;
 
 public interface TypeService {
 	
-	void saveType(ItemType itemTypes);
-	void updateType(ItemType itemTypes);
-	void deleteType(Integer id);
+	void save(ItemType itemTypes);
+	void update(ItemType itemTypes);
+	void delete(ItemType itemType);
 	Optional<ItemType> getItemTypes(Integer id);
 	List <ItemType> getAll(Integer cid);
 
