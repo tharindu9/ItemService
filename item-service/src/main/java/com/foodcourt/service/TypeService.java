@@ -1,13 +1,16 @@
 package com.foodcourt.service;
 
-import com.foodcourt.model.Type;
+import java.util.List;
+import java.util.Optional;
+
+import com.foodcourt.model.ItemType;
 
 public interface TypeService {
 	
-	void saveType(Type itemTypes);
-	void updateType(Type itemTypes);
+	void saveType(ItemType itemTypes);
+	void updateType(ItemType itemTypes);
 	void deleteType(Integer id);
-	Optional<ItemTypes> getItemTypes(Integer id);
-	List <ItemTypes> getAllTypes(Integer cid);
+	Optional<ItemType> getItemTypes(Integer id);
+	List <ItemType> getAll(Integer cid);
 
 }
