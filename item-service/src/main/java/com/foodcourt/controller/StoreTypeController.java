@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,26 +34,39 @@ public class StoreTypeController {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ExceptionHandler({NullValueException.class})
 	public ResponseEntity<StoreType> fetchStoreType(@PathVariable Integer id)  {
 		StoreType StoreType1 = new StoreType();
 		StoreType1.setId(id);
 		StoreType StoreType2 = storeTypeService.findOne(StoreType1.getId());
 		if (StoreType2 == null) {
-			//throw new IdNotFound("Can't find this id : " + id);
-			return null;
+			throw new NullValueException("Can't find this id : " + id);
+			//return null;
 		} else {
 			return new ResponseEntity<StoreType>(StoreType2, HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping( method = RequestMethod.PUT)
+	@ExceptionHandler({NullValueException.class})
 	public StoreType update(@RequestBody StoreType StoreType) {
-		return storeTypeService.update(StoreType);
+		if(StoreType == null){
+			throw new NullValueException("");
+		}
+		else{
+			return storeTypeService.update(StoreType);
+		}
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
+	@ExceptionHandler({NullValueException.class})
 	public void delete(@RequestBody StoreType StoreType) {
-		storeTypeService.delete(StoreType);
+		if(StoreType == null){
+			throw new NullValueException("");
+		}
+		else{
+			storeTypeService.delete(StoreType);
+		}
 	}
 
 	

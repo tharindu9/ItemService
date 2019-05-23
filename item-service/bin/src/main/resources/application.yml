@@ -1,0 +1,12 @@
+spring:
+  datasource: 
+    url: jdbc:mysql://localhost:3306/inventrydbs?createDatabaseIfNotExist=true
+    username: root
+    password: 1qaz2wsx@
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  show-sql: true

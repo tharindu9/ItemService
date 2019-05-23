@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,28 +33,43 @@ public class BatchController {
 	public List<Batch> fetchAll() {
 		return batchService.fetchAll();
 	}
-
+	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ExceptionHandler({NullValueException.class })
 	public ResponseEntity<Batch> fetchBatch(@PathVariable Integer id)  {
 		Batch Batch1 = new Batch();
 		Batch1.setId(id);
 		Batch Batch2 = batchService.fetchOne(Batch1);
 		if (Batch2 == null) {
-			//throw new IdNotFound("Can't find this id : " + id);
-			return null;
+			throw new NullValueException("Can't find this id : " + id);
+			//return null;
 		} else {
 			return new ResponseEntity<Batch>(Batch2, HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping( method = RequestMethod.PUT)
+	@ExceptionHandler({NullValueException.class })
 	public Batch update(@RequestBody Batch Batch) {
-		return batchService.update(Batch);
+		if(Batch == null){
+			throw new NullValueException(""+ Batch);
+		}
+		else{
+			return batchService.update(Batch);
+	
+		}
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
+	@ExceptionHandler({NullValueException.class })
 	public void delete(@RequestBody Batch Batch) {
-		batchService.delete(Batch);
+		if(Batch == null){
+			throw new NullValueException(""+Batch);
+		}
+		else{
+			batchService.delete(Batch);
+	
+		}
 	}
 
 }
