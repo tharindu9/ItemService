@@ -59,12 +59,7 @@ public class StoreTypeController {
 
 	@RequestMapping( method = RequestMethod.DELETE)
 	public void delete(@RequestBody StoreType StoreType) {
-		if(StoreType == null){
-			
-		}
-		else{
 			storeTypeService.delete(StoreType);
-		}
 	}
 
 	

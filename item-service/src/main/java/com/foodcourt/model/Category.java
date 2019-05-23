@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -23,9 +25,7 @@ public class Category {
 	@NonNull
 	String name;
 	@OneToMany(mappedBy ="category", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	
-	
-	
+	@JsonIgnore
 	List<ItemType> types;
 	public Integer getId() {
 		return id;
