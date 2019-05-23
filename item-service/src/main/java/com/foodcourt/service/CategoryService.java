@@ -7,8 +7,8 @@ import com.foodcourt.model.Category;
 public interface CategoryService {
 
 	Category save(Category category);
-	List<Category> fetchAllCategory();
-	Category fetchCategory(Category category);
-	Category updateCategory(Category category);
-	void deleteCategory(Category category);
+	List<Category> fetchAll();
+	Category fetch(Category category);
+	Category update(Category category);
+	void delete(Category category);
 }

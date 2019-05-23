@@ -17,10 +17,7 @@ public class ExceptionHandlerClass extends ResponseEntityExceptionHandler{
 		ErrorMassage errMsg =
 				new ErrorMassage(ex.getMessage(), request.getDescription(false));	
 		return new ResponseEntity<>(errMsg, HttpStatus.NOT_FOUND);
-	
 	}
-	
-	
 	
 	@ExceptionHandler(CategoryException.class)
 	public final ResponseEntity<ErrorMassage> categoryNotFound(CategoryException ex ,
@@ -28,13 +25,23 @@ public class ExceptionHandlerClass extends ResponseEntityExceptionHandler{
 		ErrorMassage errMsg =
 				new ErrorMassage(ex.getMessage(), request.getDescription(false));	
 		return new ResponseEntity<>(errMsg, HttpStatus.NOT_FOUND);
-	
 	}
-	
-	
-	
-	
-	
+
+	@ExceptionHandler(BatchException.class)
+	public final ResponseEntity<ErrorMassage> batchNotFound(BatchException ex ,
+			WebRequest request){
+		ErrorMassage errMsg =
+				new ErrorMassage(ex.getMessage(), request.getDescription(false));	
+		return new ResponseEntity<>(errMsg, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(BrandException.class)
+	public final ResponseEntity<ErrorMassage> brandNotFound(BatchException ex ,
+			WebRequest request){
+		ErrorMassage errMsg =
+				new ErrorMassage(ex.getMessage(), request.getDescription(false));	
+		return new ResponseEntity<>(errMsg, HttpStatus.NOT_FOUND);
+	}
 	
 	
 

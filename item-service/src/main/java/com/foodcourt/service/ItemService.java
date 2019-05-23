@@ -11,5 +11,6 @@ public interface ItemService {
 	Item fetchOne(Long id);
 	Item update(Item Item);
 	void delete(Item Item);
+	List <Item> critical();
 	
 }

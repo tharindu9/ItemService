@@ -22,21 +22,21 @@ public class CategoryControll {
 	@Autowired
 	CategoryService categoryService;
 
-	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	@RequestMapping( method = RequestMethod.POST)
 	public Category save(@RequestBody Category category) {
 		return categoryService.save(category);
 	}
 
-	@RequestMapping(value = "/category", method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.GET)
 	public List<Category> fetchAllCategory() {
-		return categoryService.fetchAllCategory();
+		return categoryService.fetchAll();
 	}
 
-	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Category> fetchCategory(@PathVariable Integer id)  {
 		Category category1 = new Category();
 		category1.setId(id);
-		Category category2 = categoryService.fetchCategory(category1);
+		Category category2 = categoryService.fetch(category1);
 		if (category2 == null) {
 			//throw new IdNotFound("Can't find this id : " + id);
 			return null;
@@ -46,15 +46,15 @@ public class CategoryControll {
 
 	}
 
-	@RequestMapping(value = "/category/{id}", method = RequestMethod.PUT)
-	public Category update(@RequestBody Category category, @PathVariable Integer id) {
-		return categoryService.updateCategory(category);
+	@RequestMapping( method = RequestMethod.PUT)
+	public Category update(@RequestBody Category category) {
+		return categoryService.update(category);
 
 	}
 
-	@RequestMapping(value = "/category/{id}", method = RequestMethod.DELETE)
-	public void delete(@RequestBody Category category, @PathVariable Integer id) {
-		categoryService.deleteCategory(category);
+	@RequestMapping( method = RequestMethod.DELETE)
+	public void delete(@RequestBody Category category) {
+		categoryService.delete(category);
 	}
 
 }

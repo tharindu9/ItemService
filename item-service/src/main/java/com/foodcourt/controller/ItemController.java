@@ -24,34 +24,33 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 	
-	@RequestMapping(value="item" , method = RequestMethod.POST)
+	@RequestMapping( method = RequestMethod.POST)
 	public Item save(@RequestBody Item item){
-		return itemService.save(item);	
+			return itemService.save(item);	
 	}
 	
-	@RequestMapping(value="item",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Item> fetchAll(){
 		return itemService.fetchAll();
 	}
 	
-	@RequestMapping(value="item/{id}",method = RequestMethod.GET)
+	@RequestMapping(value="{id}",method = RequestMethod.GET)
 	public ResponseEntity<Item> fetch(@PathVariable Long id) {
 				return ResponseEntity.ok(itemService.fetchOne(id));	
 	}
 	
-	@RequestMapping(value="item",method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Item> update(@RequestBody Item item) throws ObjectNotFoundException{
-			if(itemService.update(item)!=null) {
-				return ResponseEntity.ok(itemService.update(item));
-			}
-			else {
-				//return ResponseEntity.notFound().build();
-				throw new ObjectNotFoundException("Cant find this item");
-			}
+				return ResponseEntity.ok(itemService.update(item));	
 	}
 	
-	@RequestMapping(value="item",method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE)
 	void delete(@RequestBody Item item) {
 		itemService.delete(item);
+	}
+	
+	@RequestMapping(value = "critical" ,method = RequestMethod.GET)
+	public List<Item> critical(){
+		return itemService.critical();
 	}
 }

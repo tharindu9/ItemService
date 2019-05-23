@@ -10,6 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.boot.archive.spi.ArchiveException;
+import org.springframework.http.HttpStatus;
 
 @Entity
 public class Item {
@@ -19,8 +25,14 @@ public class Item {
 	private Long id;
 	@Column(unique = true)
 	private String name;
+	@NotNull(message = "Sales price can not be null")
+	@Min(1)
 	private BigDecimal salesPrice;
+	@NotNull(message = "Unit price can not be null")
+	@Min(1)
 	private BigDecimal unitPrice;
+	@NotNull(message = "Sales price can not be null")
+	@Min(1)
 	private Integer quentity;
 	private BigDecimal discount;
 	
@@ -40,17 +52,20 @@ public class Item {
 	@JoinColumn
 	private Batch batch;
 	
+	private Integer criticalLevel;
+	
+
+	public Integer getCriticalLevel() {
+		return criticalLevel;
+	}
+	public void setCriticalLevel(Integer criticalLevel) {
+		this.criticalLevel = criticalLevel;
+	}
 	public Integer getQuentity() {
 		return quentity;
 	}
 	public void setQuentity(Integer quentity) {
-		if(quentity!=0) {
 			this.quentity = quentity;
-		}
-		else {
-			//exception
-		}
-		
 	}
 	public Long getId() {
 		return id;
@@ -68,25 +83,13 @@ public class Item {
 		return salesPrice;
 	}
 	public void setSalesPrice(BigDecimal salesPrice) {
-		if(salesPrice!= BigDecimal.valueOf(0)) {
 			this.salesPrice = salesPrice;
-		}
-		else {
-			//throw new value not match
-		}
-		
 	}
 	public BigDecimal getUnitPrice() {
 		return unitPrice;
 	}
 	public void setUnitPrice(BigDecimal unitPrice) {
-		if(unitPrice!= BigDecimal.valueOf(0)) {
-			this.unitPrice = salesPrice;
-		}
-		else {
-			//throw new value not match
-		}
-
+			this.unitPrice = unitPrice;
 	}
 	
 	public UOM getUom() {
