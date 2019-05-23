@@ -27,20 +27,20 @@ public class TypeController {
 	
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.POST)
-	public void saveType( @RequestBody ItemType itemTypes,@PathVariable Integer cid )
+	public void save( @RequestBody ItemType itemTypes,@PathVariable Integer cid )
 	{
 		itemTypes.setCategory(new Category (cid, ""));
 		typeService.save(itemTypes);
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.GET)
-	public List<ItemType> getAllTypes (@PathVariable Integer cid)
+	public List<ItemType> getAll (@PathVariable Integer cid)
 	{
 		return typeService.getAll(cid);
 	}
 	
 	@RequestMapping(value="itemtype/{id}", method=RequestMethod.GET)	
-	public Optional<ItemType> getItemType(@PathVariable Integer id) 
+	public Optional<ItemType> getItem(@PathVariable Integer id) 
 	{
 		if(typeService.getItemTypes(id).isPresent()) {
 			return typeService.getItemTypes(id);

@@ -35,24 +35,22 @@ public class BatchController {
 	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	@ExceptionHandler({NullValueException.class })
 	public ResponseEntity<Batch> fetchBatch(@PathVariable Integer id)  {
 		Batch Batch1 = new Batch();
 		Batch1.setId(id);
 		Batch Batch2 = batchService.fetchOne(Batch1);
 		if (Batch2 == null) {
-			throw new NullValueException("Can't find this id : " + id);
-			//return null;
+			
+			return null;
 		} else {
 			return new ResponseEntity<Batch>(Batch2, HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping( method = RequestMethod.PUT)
-	@ExceptionHandler({NullValueException.class })
 	public Batch update(@RequestBody Batch Batch) {
 		if(Batch == null){
-			throw new NullValueException(""+ Batch);
+			return null;
 		}
 		else{
 			return batchService.update(Batch);
@@ -61,15 +59,8 @@ public class BatchController {
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
-	@ExceptionHandler({NullValueException.class })
 	public void delete(@RequestBody Batch Batch) {
-		if(Batch == null){
-			throw new NullValueException(""+Batch);
-		}
-		else{
 			batchService.delete(Batch);
-	
-		}
 	}
 
 }

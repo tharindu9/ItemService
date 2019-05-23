@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodcourt.exception.ItemException;
 import com.foodcourt.model.Item;
 import com.foodcourt.service.ItemService;
 
@@ -34,14 +35,8 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="item/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Item> fetchItem(@PathVariable Long id) {
-			if(itemService.fetchOne(id)!=null) {
-				return ResponseEntity.ok(itemService.fetchOne(id));
-			}
-			else {
-				//throw new IdNotFound("Can't find this id : " + id);
-				return null;
-			}
+	public ResponseEntity<Item> fetch(@PathVariable Long id) {
+				return ResponseEntity.ok(itemService.fetchOne(id));	
 	}
 	
 	@RequestMapping(value="item",method = RequestMethod.PUT)

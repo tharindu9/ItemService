@@ -33,24 +33,22 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	@ExceptionHandler({NullValueException.class })
 	public ResponseEntity<Brand> fetch(@PathVariable Integer id)  {
 		Brand Brand1 = new Brand();
 		Brand1.setId(id);
 		Brand Brand2 = brandService.fetchOne(Brand1);
 		if (Brand2 == null) {
-			throw new NullValueException("Can't find this id : " + id);
-			//return null;
+			
+			return null;
 		} else {
 			return new ResponseEntity<Brand>(Brand2, HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping( method = RequestMethod.PUT)
-	@ExceptionHandler({NullValueException.class })
 	public Brand update(@RequestBody Brand Brand) {
 		if(Brand == null){
-			throw new NullValueException("null cannot be updated " );
+			return null;
 		}
 		else{
 			return brandService.update(Brand);
@@ -59,14 +57,9 @@ public class BrandController {
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
-	@ExceptionHandler({NullValueException.class })
 	public void delete(@RequestBody Brand Brand) {
-		if(Brand == null){
-			throw new NullValueException("");
-		}
-		else{
 			brandService.delete(Brand);
-		}
+		
 	}
 
 
