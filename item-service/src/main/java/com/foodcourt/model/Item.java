@@ -31,9 +31,13 @@ public class Item {
 	@NotNull(message = "Unit price can not be null")
 	@Min(1)
 	private BigDecimal unitPrice;
+<<<<<<< HEAD
+	private Integer quantity;
+=======
 	@NotNull(message = "Sales price can not be null")
 	@Min(1)
 	private Integer quentity;
+>>>>>>> 9e9900095717433089ce0178f856bf91317c0c32
 	private BigDecimal discount;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -62,10 +66,20 @@ public class Item {
 		this.criticalLevel = criticalLevel;
 	}
 	public Integer getQuentity() {
-		return quentity;
+		return quantity;
 	}
 	public void setQuentity(Integer quentity) {
+<<<<<<< HEAD
+		if(quentity!=0) {
+			this.quantity = quentity;
+		}
+		else {
+			//exception
+		}
+		
+=======
 			this.quentity = quentity;
+>>>>>>> 9e9900095717433089ce0178f856bf91317c0c32
 	}
 	public Long getId() {
 		return id;
