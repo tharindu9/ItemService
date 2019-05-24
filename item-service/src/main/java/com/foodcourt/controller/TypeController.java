@@ -27,7 +27,7 @@ public class TypeController {
 	
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.POST)
-	public void saveType( @RequestBody ItemType itemTypes,@PathVariable Integer cid )
+	public void save( @RequestBody ItemType itemTypes,@PathVariable Integer cid )
 	{
 		itemTypes.setCategory(new Category (cid, ""));
 		typeService.save(itemTypes);

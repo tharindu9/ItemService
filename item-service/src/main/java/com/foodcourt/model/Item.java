@@ -21,7 +21,7 @@ public class Item {
 	private String name;
 	private BigDecimal salesPrice;
 	private BigDecimal unitPrice;
-	private Integer quentity;
+	private Integer quantity;
 	private BigDecimal discount;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -41,11 +41,11 @@ public class Item {
 	private Batch batch;
 	
 	public Integer getQuentity() {
-		return quentity;
+		return quantity;
 	}
 	public void setQuentity(Integer quentity) {
 		if(quentity!=0) {
-			this.quentity = quentity;
+			this.quantity = quentity;
 		}
 		else {
 			//exception
