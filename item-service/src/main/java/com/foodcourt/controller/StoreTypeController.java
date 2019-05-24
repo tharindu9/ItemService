@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class StoreTypeController {
 		StoreType1.setId(id);
 		StoreType StoreType2 = storeTypeService.findOne(StoreType1.getId());
 		if (StoreType2 == null) {
-			//throw new IdNotFound("Can't find this id : " + id);
+			
 			return null;
 		} else {
 			return new ResponseEntity<StoreType>(StoreType2, HttpStatus.OK);
@@ -46,13 +47,19 @@ public class StoreTypeController {
 	}
 
 	@RequestMapping( method = RequestMethod.PUT)
+
 	public StoreType update(@RequestBody StoreType StoreType) {
-		return storeTypeService.update(StoreType);
+		if(StoreType == null){
+			return null;
+		}
+		else{
+			return storeTypeService.update(StoreType);
+		}
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
 	public void delete(@RequestBody StoreType StoreType) {
-		storeTypeService.delete(StoreType);
+			storeTypeService.delete(StoreType);
 	}
 
 	

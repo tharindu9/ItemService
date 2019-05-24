@@ -34,13 +34,13 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.GET)
-	public List<ItemType> getAllTypes (@PathVariable Integer cid)
+	public List<ItemType> getAll (@PathVariable Integer cid)
 	{
 		return typeService.getAll(cid);
 	}
 	
 	@RequestMapping(value="itemtype/{id}", method=RequestMethod.GET)	
-	public Optional<ItemType> getItemType(@PathVariable Integer id) 
+	public Optional<ItemType> getItem(@PathVariable Integer id) 
 	{
 		if(typeService.getItemTypes(id).isPresent()) {
 			return typeService.getItemTypes(id);

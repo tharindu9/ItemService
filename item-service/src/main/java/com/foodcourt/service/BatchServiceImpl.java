@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.foodcourt.exception.BatchException;
 import com.foodcourt.model.Batch;
 import com.foodcourt.model.Category;
 import com.foodcourt.repository.BatchRepository;
@@ -33,7 +34,7 @@ public class BatchServiceImpl implements BatchService{
 			return opBatch.get();
 		} else {
 			//Here is the exception
-			return null;
+		throw new BatchException("can not find batch id:"+ batch.getId());
 		}
 	}
 
@@ -44,8 +45,8 @@ public class BatchServiceImpl implements BatchService{
 			return batchRepository.save(batch);
 		}
 		else {
-			//exception
-			return null;
+		
+			throw new BatchException("can not find batch id:"+ batch.getId());
 		}
 			
 	}
@@ -55,6 +56,9 @@ public class BatchServiceImpl implements BatchService{
 		Optional<Batch> opBatch = batchRepository.findById(batch.getId());
 		if (opBatch.isPresent()) {
 			batchRepository.delete(batch);
+		}
+		else {
+			throw new BatchException("can not find batch id:"+ batch.getId());
 		}
 
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,14 +33,14 @@ public class BatchController {
 	public List<Batch> fetchAll() {
 		return batchService.fetchAll();
 	}
-
+	
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Batch> fetchBatch(@PathVariable Integer id)  {
 		Batch Batch1 = new Batch();
 		Batch1.setId(id);
 		Batch Batch2 = batchService.fetchOne(Batch1);
 		if (Batch2 == null) {
-			//throw new IdNotFound("Can't find this id : " + id);
+			
 			return null;
 		} else {
 			return new ResponseEntity<Batch>(Batch2, HttpStatus.OK);
@@ -48,12 +49,17 @@ public class BatchController {
 
 	@RequestMapping( method = RequestMethod.PUT)
 	public Batch update(@RequestBody Batch Batch) {
-		return batchService.update(Batch);
+		if(Batch == null){
+			return null;
+		}
+		else{
+			return batchService.update(Batch);
+		}
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
 	public void delete(@RequestBody Batch Batch) {
-		batchService.delete(Batch);
+			batchService.delete(Batch);
 	}
 
 }

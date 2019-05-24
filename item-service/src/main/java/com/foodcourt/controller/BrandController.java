@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class BrandController {
 		Brand1.setId(id);
 		Brand Brand2 = brandService.fetchOne(Brand1);
 		if (Brand2 == null) {
-			//throw new IdNotFound("Can't find this id : " + id);
+			
 			return null;
 		} else {
 			return new ResponseEntity<Brand>(Brand2, HttpStatus.OK);
@@ -46,12 +47,19 @@ public class BrandController {
 
 	@RequestMapping( method = RequestMethod.PUT)
 	public Brand update(@RequestBody Brand Brand) {
-		return brandService.update(Brand);
+		if(Brand == null){
+			return null;
+		}
+		else{
+			return brandService.update(Brand);
+		}
+		
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
 	public void delete(@RequestBody Brand Brand) {
-		brandService.delete(Brand);
+			brandService.delete(Brand);
+		
 	}
 
 

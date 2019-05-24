@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.foodcourt.exception.CategoryException;
 import com.foodcourt.model.Category;
 import com.foodcourt.repository.CategoryRepository;
 
@@ -22,37 +23,30 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Category> fetchAllCategory() {
+	public List<Category> fetchAll() {
 
 		return categoryRepository.findAll();
 	}
 
-	public Category fetchCategory(Category category) {
+	public Category fetch(Category category) {
 		Optional<Category> optional = categoryRepository.findById(category.getId());
 		if (optional.isPresent()) {
 			return optional.get();
 		} else {
-			return null;
+		 throw new CategoryException("can not find category id" + category.getName());
 		}
 	}
 
 	@Override
-	public Category updateCategory(Category category) {
-		Optional<Category> optional = categoryRepository.findById(category.getId());
-		if (optional.isPresent()) {
+	public Category update(Category category) {
 			return categoryRepository.save(category);
-		} else {
-			return null;
-		}
+		
 	}
 
 	@Override
-	public void deleteCategory(Category category) {
-		Optional<Category> optional = categoryRepository.findById(category.getId());
-		if (optional.isPresent()) {
+	public void delete(Category category) {
 			categoryRepository.delete(category);
-		}
-
+		
 	}
 
 }
