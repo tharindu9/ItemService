@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodcourt.model.Brand;
+import com.foodcourt.model.Item;
 import com.foodcourt.service.BrandService;
+
 
 @RestController
 @RequestMapping("brand")
@@ -38,7 +40,6 @@ public class BrandController {
 		Brand1.setId(id);
 		Brand Brand2 = brandService.fetchOne(Brand1);
 		if (Brand2 == null) {
-			
 			return null;
 		} else {
 			return new ResponseEntity<Brand>(Brand2, HttpStatus.OK);
@@ -53,14 +54,19 @@ public class BrandController {
 		else{
 			return brandService.update(Brand);
 		}
-		
 	}
 
 	@RequestMapping( method = RequestMethod.DELETE)
 	public void delete(@RequestBody Brand Brand) {
 			brandService.delete(Brand);
-		
 	}
-
-
+	
+	@RequestMapping(value = "{id}/item" , method = RequestMethod.GET)
+	public ResponseEntity<List<Item>> fetchItems(@PathVariable Integer id){
+		Brand brand = new Brand();
+		brand.setId(id);
+		List<Item> items  = brandService.fetchOne(brand).getItems();
+		return new ResponseEntity<List<Item>>(items,HttpStatus.OK);
+	}
+	
 }

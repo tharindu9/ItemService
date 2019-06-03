@@ -12,5 +12,6 @@ public interface ItemService {
 	Item update(Item Item);
 	void delete(Item Item);
 	List <Item> critical();
+	Item findByName(String name);
 	
 }

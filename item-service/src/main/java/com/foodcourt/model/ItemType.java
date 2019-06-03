@@ -10,20 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ItemType {
-
-	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
+	
+	@NotNull(message = "Name should not be null")
 	String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	@JsonIgnore
 	private Category category;
