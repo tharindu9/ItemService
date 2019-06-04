@@ -24,26 +24,22 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> items = fetchAll();
 		boolean flag = false;
 		for (Item item1 : items) {
-//			if(item1.getName().equals(item.getName())) {
-//				System.out.println("name is exist");
-//			}
+
 			if (item1.getName().equals(item.getName()) && 
 					item1.getBrand().getId() == item.getBrand().getId() &&
 					item1.getUom().getId() == item.getUom().getId()
 					) {
-				System.out.println("kkkk");
+			
 				flag = true;//item exist
 				break;
 
 			}
 		}
 		if (flag) {
-			System.out.println("vgrge");
 			throw new RuntimeException("Item is not uniq");
 			
 
 		} else {
-			System.out.println("xxxxxxxxxx");
 			return itemRepository.save(item);
 		}
 

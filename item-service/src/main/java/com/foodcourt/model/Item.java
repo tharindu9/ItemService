@@ -35,7 +35,13 @@ public class Item {
 	@NotNull(message = "Unit price can not be null")
 	@Min(1)
 	private BigDecimal unitPrice;
-	
+
+	private Integer quantity;
+
+	@NotNull(message = "Sales price can not be null")
+	@Min(1)
+	private Integer quentity;
+
 	private BigDecimal discount;
 	
 	@ManyToOne
@@ -76,7 +82,14 @@ public class Item {
 	public void setCriticalLevel(Integer criticalLevel) {
 		this.criticalLevel = criticalLevel;
 	}
-	
+
+	public Integer getQuentity() {
+		return quantity;
+	}
+	public void setQuentity(Integer quentity) {
+			this.quantity = quentity;
+	}
+
 	public Long getId() {
 		return id;
 	}
