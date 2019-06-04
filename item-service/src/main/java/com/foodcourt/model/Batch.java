@@ -1,15 +1,20 @@
 package com.foodcourt.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Batch {
@@ -20,14 +25,14 @@ public class Batch {
 	
 	@Column(unique = true)
 	private String name;
-	Date manufactureDate;
-	Date expireDate;
+	private Date manufactureDate;
+	private Date expireDate;
 	
-	@OneToMany(mappedBy = "batch")
+	@OneToMany(mappedBy = "",cascade = CascadeType.ALL)
 	private Set<Item> items;
 	
-	@ManyToOne
-	private Brand brands;
+	@NotNull(message=" Quantity should not be null ")
+	private Long quantity;
 	
 	
 	public Integer getId() {

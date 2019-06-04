@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.NonNull;
 
@@ -22,7 +23,8 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
 	@Column(unique = true)
-	@NonNull
+	
+	@NotNull (message = "name should not be null ")
 	String name;
 	@OneToMany(mappedBy ="category", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JsonIgnore

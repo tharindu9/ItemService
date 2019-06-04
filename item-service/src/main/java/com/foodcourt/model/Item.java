@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -23,24 +24,31 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
+	
+	@NotNull(message = "name should not be null")
 	private String name;
+	
 	@NotNull(message = "Sales price can not be null")
 	@Min(1)
 	private BigDecimal salesPrice;
+	
 	@NotNull(message = "Unit price can not be null")
 	@Min(1)
 	private BigDecimal unitPrice;
-<<<<<<< HEAD
+
 	private Integer quantity;
-=======
+
 	@NotNull(message = "Sales price can not be null")
 	@Min(1)
 	private Integer quentity;
->>>>>>> 9e9900095717433089ce0178f856bf91317c0c32
+
 	private BigDecimal discount;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn
+	private Batch batch;
+	
+	@ManyToOne
 	@JoinColumn
 	private ItemType itemType;
 	
@@ -52,10 +60,19 @@ public class Item {
 	@JoinColumn
 	private StoreType storeType;
 	
+	//@OneToOne(cascade = CascadeType.ALL)
+	//private Batch batch;
+	
 	@ManyToOne
 	@JoinColumn
-	private Batch batch;
+	private Brand brand;
 	
+	public Brand getBrand() {
+		return brand;
+	}
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
 	private Integer criticalLevel;
 	
 
@@ -65,22 +82,14 @@ public class Item {
 	public void setCriticalLevel(Integer criticalLevel) {
 		this.criticalLevel = criticalLevel;
 	}
+
 	public Integer getQuentity() {
 		return quantity;
 	}
 	public void setQuentity(Integer quentity) {
-<<<<<<< HEAD
-		if(quentity!=0) {
 			this.quantity = quentity;
-		}
-		else {
-			//exception
-		}
-		
-=======
-			this.quentity = quentity;
->>>>>>> 9e9900095717433089ce0178f856bf91317c0c32
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -97,6 +106,13 @@ public class Item {
 		return salesPrice;
 	}
 	public void setSalesPrice(BigDecimal salesPrice) {
+//		if(discount == BigDecimal.valueOf(0)) {
+//			this.salesPrice = salesPrice;
+//		}
+//		else {
+//			BigDecimal dis = new BigDecimal("100");
+//			this.salesPrice= salesPrice.multiply(discount).divide(dis);
+//		}
 			this.salesPrice = salesPrice;
 	}
 	public BigDecimal getUnitPrice() {
@@ -118,12 +134,12 @@ public class Item {
 	public void setStoreType(StoreType storeType) {
 		this.storeType = storeType;
 	}
-	public Batch getBatch() {
-		return batch;
-	}
-	public void setBatch(Batch batch) {
-		this.batch = batch;
-	}
+//	public Batch getBatch() {
+//		return batch;
+//	}
+//	public void setBatch(Batch batch) {
+//		this.batch = batch;
+//	}
 	
 	public BigDecimal getDiscount() {
 		return discount;

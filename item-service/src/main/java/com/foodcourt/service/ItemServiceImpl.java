@@ -14,17 +14,35 @@ import com.foodcourt.repository.ItemRepository;
 import com.foodcourt.repository.ItemRepository;
 
 @Service
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	ItemRepository itemRepository;
 
 	@Override
 	public Item save(Item item) {
-		if(item.getQuentity()==0) {
-			throw new RuntimeException("Quentity should not be 0");
+		List<Item> items = fetchAll();
+		boolean flag = false;
+		for (Item item1 : items) {
+
+			if (item1.getName().equals(item.getName()) && 
+					item1.getBrand().getId() == item.getBrand().getId() &&
+					item1.getUom().getId() == item.getUom().getId()
+					) {
+			
+				flag = true;//item exist
+				break;
+
+			}
 		}
-		return itemRepository.save(item);
+		if (flag) {
+			throw new RuntimeException("Item is not uniq");
+			
+
+		} else {
+			return itemRepository.save(item);
+		}
+
 	}
 
 	@Override
@@ -48,7 +66,7 @@ public class ItemServiceImpl implements ItemService{
 		if (opItem.isPresent()) {
 			return itemRepository.save(item);
 		} else {
-			throw new ItemException("can not find item id :" +item.getId() );
+			throw new ItemException("can not find item id :" + item.getId());
 		}
 
 	}
@@ -58,21 +76,18 @@ public class ItemServiceImpl implements ItemService{
 		Optional<Item> opItem = itemRepository.findById(item.getId());
 		if (opItem.isPresent()) {
 			itemRepository.delete(item);
+		} else {
+			throw new ItemException("can not find item id :" + item.getId());
 		}
-	 else {
-		throw new ItemException("can not find item id :" +item.getId());
-	}
 
 	}
-	
-	public List <Item> critical() {
-		List<Item> items = fetchAll();
-		List<Item> criticalItems = new ArrayList<Item>();
-		for(Item item : items) {
-			if(item.getCriticalLevel() - item.getQuentity() >=0) {
-				criticalItems.add(item);
-			}
-		}
-		return criticalItems;
+
+	public List<Item> critical() {
+		return null;
+	}
+
+	@Override
+	public Item findByName(String name) {
+		return itemRepository.findByName(name);
 	}
 }
