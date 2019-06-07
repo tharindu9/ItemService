@@ -15,19 +15,24 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.displayeItems();
+    this.displayeItems(); 
   }
 
   displayeItems(){
-    this.items = this.itemService.getAllItems();
+    this.items = this.itemService.getAllItems()
     this.items.forEach(ele=>{
       console.log(ele);
-    })
+    },)
   }
 
-  onDelete(id:number){
+  onDelete(id){
     console.log(id)
-    this.itemService.removeItem(id)
+    this.itemService.removeItem(id).subscribe(item=>{
+      console.log(item)
+    },
+    err=>{
+      console.log(err)
+    })
   }
 
 }

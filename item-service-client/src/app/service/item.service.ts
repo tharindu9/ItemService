@@ -20,7 +20,7 @@ export class ItemService {
     return this.httpClient.get(`${this.baseUrl}`);
   }
 
-  removeItem(id:number) {
+  removeItem(id:number):Observable<any> {
     console.log(id);
     console.log(`${this.baseUrl}/${id}`);
     return this.httpClient.delete(`${this.baseUrl}/${id}` , { responseType: 'text' });
