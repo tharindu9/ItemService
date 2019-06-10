@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="sts-bundle">
+        <property name="context-root" value="sts-bundle"/>
+        <property name="java-output-path" value="/sts-bundle/build/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,37 @@
+<h3 style="text-align: center;">Brand List</h3>
+<table class="table table-hover" style="margin-left: 1%">
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Delete</th>
+      <th>Update</th>
+  
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands | async
+       | paginate :{ itemsPerPage: 5, currentPage: p }; let i = index" > 
+        
+        <td>{{i+1}}</td>
+        <td (click)="fetchBrandItemList(brand.id)">{{brand.name}}</td> 
+         <td><button class="btn text-danger" (click)="onDelete(brand.id)"><i class="fa fa-trash"></i></button></td>
+         <td><a class="btn text-success" (click)="onEdit(brand)"><i class="fa fa-edit"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6" *ngIf="viewItemList">
+        <h3 style="text-align: center;">Item List</h3>
+
+      <ul>
+        <li *ngFor="let item of items | async">
+          {{item.name}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3"></div>
+
+  </div>
+
