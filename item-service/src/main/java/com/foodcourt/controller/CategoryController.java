@@ -4,6 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value = "/category")
+@CrossOrigin
 public class CategoryController {
 
 	@Autowired
@@ -29,6 +33,7 @@ public class CategoryController {
 
 	@RequestMapping( method = RequestMethod.GET)
 	public List<Category> fetchAllCategory() {
+		
 		return categoryService.fetchAll();
 	}
 
@@ -49,12 +54,12 @@ public class CategoryController {
 	@RequestMapping( method = RequestMethod.PUT)
 	public Category update(@RequestBody Category category) {
 		return categoryService.update(category);
-
 	}
 
-	@RequestMapping( method = RequestMethod.DELETE)
-	public void delete(@RequestBody Category category) {
-		categoryService.delete(category);
+	@DeleteMapping("{id}")
+	public void delete(@PathVariable  Integer id) {
+		System.out.println("delete testing");
+		categoryService.delete(id);
 	}
 
 }

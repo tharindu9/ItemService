@@ -22,6 +22,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(value="item")
 public class ItemController {
 
@@ -48,9 +49,9 @@ public class ItemController {
 				return ResponseEntity.ok(itemService.update(item));	
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
-	void delete(@RequestBody Item item) {
-		itemService.delete(item);
+	@RequestMapping( value = "{id}" , method = RequestMethod.DELETE)
+	void delete(@PathVariable Long id) {
+		itemService.delete(id);
 	}
 	
 	@RequestMapping(value = "critical" ,method = RequestMethod.GET)

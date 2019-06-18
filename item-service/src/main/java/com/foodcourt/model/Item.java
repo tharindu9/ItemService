@@ -38,10 +38,6 @@ public class Item {
 
 	private Integer quantity;
 
-	@NotNull(message = "Sales price can not be null")
-	@Min(1)
-	private Integer quentity;
-
 	private BigDecimal discount;
 	
 	@ManyToOne

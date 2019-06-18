@@ -10,5 +10,5 @@ public interface CategoryService {
 	List<Category> fetchAll();
 	Category fetch(Category category);
 	Category update(Category category);
-	void delete(Category category);
+	void delete(Integer id);
 }
