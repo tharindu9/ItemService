@@ -24,7 +24,6 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> items = fetchAll();
 		boolean flag = false;
 		for (Item item1 : items) {
-
 			if (item1.getName().equals(item.getName()) && 
 					item1.getBrand().getId() == item.getBrand().getId() &&
 					item1.getUom().getId() == item.getUom().getId()
@@ -72,12 +71,12 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void delete(Item item) {
-		Optional<Item> opItem = itemRepository.findById(item.getId());
+	public void delete(Long id) {
+		Optional<Item> opItem = itemRepository.findById(id);
 		if (opItem.isPresent()) {
-			itemRepository.delete(item);
+			itemRepository.deleteById(id);
 		} else {
-			throw new ItemException("can not find item id :" + item.getId());
+			throw new ItemException("can not find item id :" );
 		}
 
 	}

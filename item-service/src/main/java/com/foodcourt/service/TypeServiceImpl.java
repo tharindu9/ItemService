@@ -17,7 +17,7 @@ public class TypeServiceImpl implements TypeService {
 	TypeRepository typeRepository;
 	
 	@Override
-	public List <ItemType> getAll(Integer cid)
+	public List <ItemType> getAllBycid(Integer cid)
 	{
 		List<ItemType> types= new ArrayList<>();
 		typeRepository.findByCategoryId(cid).forEach(types :: add);
@@ -46,6 +46,12 @@ public class TypeServiceImpl implements TypeService {
 	public void delete(ItemType itemType)
 	{
 		typeRepository.delete(itemType);
+	}
+
+	@Override
+	public List<ItemType> getAll() {
+		
+		return typeRepository.findAll();
 	}
 	
 }

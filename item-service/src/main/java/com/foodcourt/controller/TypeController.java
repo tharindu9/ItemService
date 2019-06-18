@@ -34,9 +34,15 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value="category/{cid}/itemtype", method=RequestMethod.GET)
-	public List<ItemType> getAll (@PathVariable Integer cid)
+	public List<ItemType> getAllBycid (@PathVariable Integer cid)
 	{
-		return typeService.getAll(cid);
+		return typeService.getAllBycid(cid);
+	}
+	
+	@RequestMapping(value="itemtype", method=RequestMethod.GET)
+	public List<ItemType> getAll()
+	{
+		return typeService.getAll();
 	}
 	
 	@RequestMapping(value="itemtype/{id}", method=RequestMethod.GET)	

@@ -10,7 +10,7 @@ public interface ItemService {
 	List<Item> fetchAll();
 	Item fetchOne(Long id);
 	Item update(Item Item);
-	void delete(Item Item);
+	void delete(Long id);
 	List <Item> critical();
 	Item findByName(String name);
 	

@@ -11,6 +11,7 @@ public interface TypeService {
 	void update(ItemType itemTypes);
 	void delete(ItemType itemType);
 	Optional<ItemType> getItemTypes(Integer id);
-	List <ItemType> getAll(Integer cid);
+	List <ItemType> getAllBycid(Integer cid);
+	List<ItemType> getAll();
 
 }
