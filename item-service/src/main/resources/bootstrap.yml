@@ -1,14 +1,14 @@
-spring:
-  application:
-    name: item-service
+#spring:
+#  application:
+#    name: item-service
 
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-  instance:
-    instance-id: ${spring.application.name}-${random.int}
+#eureka:
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#  instance:
+#    instance-id: ${spring.application.name}-${random.int}
 
     
 server:
-  port: 0
+  port: 8080

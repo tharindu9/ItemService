@@ -20,7 +20,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value = "/category")
-@CrossOrigin
+//@CrossOrigin
 public class CategoryController {
 
 	@Autowired
@@ -28,6 +28,7 @@ public class CategoryController {
 
 	@RequestMapping( method = RequestMethod.POST)
 	public Category save(@RequestBody Category category) {
+
 		return categoryService.save(category);
 	}
 

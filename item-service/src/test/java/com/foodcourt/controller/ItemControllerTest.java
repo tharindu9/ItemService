@@ -52,7 +52,7 @@ public class ItemControllerTest {
 		item.setName("Panadol");
 		item.setUnitPrice(new BigDecimal(10));
 		item.setSalesPrice(new BigDecimal(15));
-		item.setQuentity(100);
+		//item.setQuentity(100);
 		item.setDiscount(new BigDecimal(2));
 		
 		UOM uom= new UOM();
@@ -61,7 +61,7 @@ public class ItemControllerTest {
 		
 		Batch batch = new Batch();
 		batch.setId(1);
-		item.setBatch(batch);
+		//item.setBatch(batch);
 		
 		ObjectMapper objectMapper= new ObjectMapper();
 		String str= objectMapper.writeValueAsString(item);
@@ -75,7 +75,7 @@ public class ItemControllerTest {
 		Item item= new Item();
 		item.setId(1L);
 		item.setSalesPrice(new BigDecimal(17));
-		item.setQuentity(100);
+	//	item.setQuentity(100);
 		item.setDiscount(new BigDecimal(2));
 		
 		UOM uom= new UOM();
@@ -84,7 +84,7 @@ public class ItemControllerTest {
 		
 		Batch batch = new Batch();
 		batch.setId(1);
-		item.setBatch(batch);
+	//	item.setBatch(batch);
 		
 		ObjectMapper objectMapper= new ObjectMapper();
 		String str= objectMapper.writeValueAsString(item);
@@ -98,14 +98,14 @@ public class ItemControllerTest {
 		Item item= new Item();
 		item.setId(1L);
 		item.setSalesPrice(new BigDecimal(17));
-		item.setQuentity(100);
+	//	item.setQuentity(100);
 		item.setDiscount(new BigDecimal(2));
 		UOM uom= new UOM();
 		uom.setName("Boxes");
 		item.setUom(uom);
 		Batch batch = new Batch();
 		batch.setId(1);
-		item.setBatch(batch);
+	//	item.setBatch(batch);
 		ObjectMapper objectMapper= new ObjectMapper();
 		String str= objectMapper.writeValueAsString(item);
 		mockMvc.perform(MockMvcRequestBuilders.delete("/item/item")

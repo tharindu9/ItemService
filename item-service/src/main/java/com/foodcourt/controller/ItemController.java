@@ -30,7 +30,9 @@ public class ItemController {
 	ItemService itemService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Item save(@RequestBody Item item){
+	public Item save(@RequestBody Item item)
+	{
+		System.out.println("item save");
 			return itemService.save(item);	
 	}
 	

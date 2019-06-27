@@ -23,22 +23,33 @@ public class ItemServiceImpl implements ItemService {
 	public Item save(Item item) {
 		List<Item> items = fetchAll();
 		boolean flag = false;
-		for (Item item1 : items) {
-			if (item1.getName().equals(item.getName()) && 
-					item1.getBrand().getId() == item.getBrand().getId() &&
-					item1.getUom().getId() == item.getUom().getId()
-					) {
-			
-				flag = true;//item exist
-				break;
+		if(items.size()>0){
+			System.out.println("size is ***** "+items.size());
+			for (Item item1 : items) {
+				if (item1.getName().equals(item.getName()) &&
+						item1.getBrand().getId() == item.getBrand().getId() &&
+						item1.getUom().getId() == item.getUom().getId()
+				) {
 
+					flag = true;//item exist
+					break;
+				}
+			}
+			if (flag) {
+				throw new RuntimeException("Item is not uniq");
+
+			} else {
+
+			if(item.getSalesPrice().compareTo(item.getUnitPrice())<0){
+				throw  new RuntimeException("sales price must be greater than unit price ");
+			}
+
+			else {
+				return itemRepository.save(item);
+			}
 			}
 		}
-		if (flag) {
-			throw new RuntimeException("Item is not uniq");
-			
-
-		} else {
+	    else{
 			return itemRepository.save(item);
 		}
 
@@ -67,7 +78,6 @@ public class ItemServiceImpl implements ItemService {
 		} else {
 			throw new ItemException("can not find item id :" + item.getId());
 		}
-
 	}
 
 	@Override
@@ -78,7 +88,6 @@ public class ItemServiceImpl implements ItemService {
 		} else {
 			throw new ItemException("can not find item id :" );
 		}
-
 	}
 
 	public List<Item> critical() {

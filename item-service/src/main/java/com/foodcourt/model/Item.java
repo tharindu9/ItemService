@@ -36,28 +36,30 @@ public class Item {
 	@Min(1)
 	private BigDecimal unitPrice;
 
-	private Integer quantity;
-
 	private BigDecimal discount;
-	
-	@ManyToOne
+
+	@NotNull(message = " re-order level can not be null")
+	@Min(1)
+	private Integer reOrederLever;
+	@NotNull(message = "max-order level can not be null")
+	@Min(1)
+	private Integer maxOrder;
+
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn
 	private Batch batch;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn
+
 	private ItemType itemType;
-	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn
 	private UOM uom;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn
 	private StoreType storeType;
-	
-	//@OneToOne(cascade = CascadeType.ALL)
-	//private Batch batch;
 	
 	@ManyToOne
 	@JoinColumn
@@ -79,16 +81,11 @@ public class Item {
 		this.criticalLevel = criticalLevel;
 	}
 
-	public Integer getQuentity() {
-		return quantity;
-	}
-	public void setQuentity(Integer quentity) {
-			this.quantity = quentity;
-	}
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -130,12 +127,12 @@ public class Item {
 	public void setStoreType(StoreType storeType) {
 		this.storeType = storeType;
 	}
-//	public Batch getBatch() {
-//		return batch;
-//	}
-//	public void setBatch(Batch batch) {
-//		this.batch = batch;
-//	}
+	public Batch getBatch() {
+		return batch;
+	}
+	public void setBatch(Batch batch) {
+		this.batch = batch;
+	}
 	
 	public BigDecimal getDiscount() {
 		return discount;
@@ -149,6 +146,21 @@ public class Item {
 	public void setItemType(ItemType itemType) {
 		this.itemType = itemType;
 	}
-	
+	public Integer getReOrederLever() {
+		return reOrederLever;
+	}
+
+	public void setReOrederLever(Integer reOrederLever) {
+		this.reOrederLever = reOrederLever;
+	}
+
+	public Integer getMaxOrder() {
+		return maxOrder;
+	}
+
+	public void setMaxOrder(Integer maxOrder) {
+		this.maxOrder = maxOrder;
+	}
+
 
 }
